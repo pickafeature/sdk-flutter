@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Dropped unused dependencies: `device_info_plus`, `package_info_plus`, `url_launcher`. Smaller install footprint and no out-of-date transitive constraints.
+
 ## 1.0.0
 
 First public release.
