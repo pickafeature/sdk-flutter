@@ -35,7 +35,7 @@ class ApiService {
         message = body['error'] as String;
       }
     } catch (_) {
-      // Body wasn't JSON — keep fallback.
+      // Body wasn't JSON - keep fallback.
     }
 
     int? retryAfter;
@@ -270,10 +270,10 @@ class ApiException implements Exception {
 
   ApiException(this.message, this.statusCode, {this.retryAfter});
 
-  /// True for 401/403 — bad/missing API key or revoked access.
+  /// True for 401/403 - bad/missing API key or revoked access.
   bool get isAuthError => statusCode == 401 || statusCode == 403;
 
-  /// True for 429 — too many requests. See [retryAfter].
+  /// True for 429 - too many requests. See [retryAfter].
   bool get isRateLimit => statusCode == 429;
 
   /// True when the request never reached the server (DNS, no internet, etc.).

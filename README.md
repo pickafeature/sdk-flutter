@@ -1,21 +1,21 @@
-# pick a feature — Flutter SDK
+# pick a feature - Flutter SDK
 
 [![pub package](https://img.shields.io/pub/v/pickafeature.svg)](https://pub.dev/packages/pickafeature)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 Drop-in feature request, voting, and feedback collection for Flutter apps. Backed by [pickafeature.com](https://pickafeature.com).
 
-Let your users tell you what to build. Ship a polished "Feature Requests" tab in five minutes — no infrastructure to run, no UI to design.
+Let your users tell you what to build. Ship a polished "Feature Requests" tab in five minutes - no infrastructure to run, no UI to design.
 
 ## Features
 
-- **One-line setup** — initialize with your API key, you're live
-- **Drop-in widgets** — dialog, bottom sheet, or full-screen browser. Or build your own with the typed API.
-- **Voting + comments** — users upvote and discuss, you ship the right things
-- **User identity** — attach email, name, custom ID, or revenue tier to every request
-- **Anonymous fallback** — device-level identity for users who don't sign in
-- **Theming** — primary color, text color, border radius, custom copy
-- **Self-host friendly** — configurable base URL
+- **One-line setup** - initialize with your API key, you're live
+- **Drop-in widgets** - dialog, bottom sheet, or full-screen browser. Or build your own with the typed API.
+- **Voting + comments** - users upvote and discuss, you ship the right things
+- **User identity** - attach email, name, custom ID, or revenue tier to every request
+- **Anonymous fallback** - device-level identity for users who don't sign in
+- **Theming** - primary color, text color, border radius, custom copy
+- **Self-host friendly** - configurable base URL
 
 ## Install
 
@@ -32,7 +32,7 @@ flutter pub get
 
 1. Sign up at [pickafeature.com](https://pickafeature.com)
 2. Dashboard → **Projects** → create a project → copy the API key
-3. Store it in your app (or pass it through your build config — never check secrets into git)
+3. Store it in your app (or pass it through your build config - never check secrets into git)
 
 ## Quick start
 
@@ -115,16 +115,16 @@ PickAFeatureConfig(
 | `apiKey` | `String` | _required_ | From your project's API Keys page |
 | `apiBaseUrl` | `String` | `https://pickafeature.com/api/v1/sdk` | Override for self-hosted backend |
 | `primaryColor` | `Color` | `Colors.blue` | Buttons, accents |
-| `secondaryColor` | `Color?` | — | Secondary accents |
-| `backgroundColor` | `Color?` | — | Sheet/dialog background |
-| `textColor` | `Color?` | — | Body text |
+| `secondaryColor` | `Color?` | - | Secondary accents |
+| `backgroundColor` | `Color?` | - | Sheet/dialog background |
+| `textColor` | `Color?` | - | Body text |
 | `borderRadius` | `double` | `12.0` | Card + button corner radius |
-| `customTitle` | `String?` | — | Override default screen title |
-| `customSubtitle` | `String?` | — | Override default subtitle |
-| `customPlaceholder` | `String?` | — | Submission textarea placeholder |
-| `customSubmitText` | `String?` | — | Submit button label |
+| `customTitle` | `String?` | - | Override default screen title |
+| `customSubtitle` | `String?` | - | Override default subtitle |
+| `customPlaceholder` | `String?` | - | Submission textarea placeholder |
+| `customSubmitText` | `String?` | - | Submit button label |
 | `showEmailField` | `bool` | `true` | Show an optional email input |
-| `demoMode` | `bool` | `false` | Use canned data, no network — handy for screenshots and offline dev |
+| `demoMode` | `bool` | `false` | Use canned data, no network - handy for screenshots and offline dev |
 
 ## Data storage
 
@@ -141,7 +141,7 @@ await PickAFeature.clearUserData();
 
 ## Error handling
 
-The widget UIs surface errors via in-context `SnackBar` messages. If you're using the programmatic API directly, calls throw `ApiException` on non-2xx responses — catch it to handle the failure however your app prefers:
+The widget UIs surface errors via in-context `SnackBar` messages. If you're using the programmatic API directly, calls throw `ApiException` on non-2xx responses - catch it to handle the failure however your app prefers:
 
 ```dart
 try {
@@ -153,4 +153,4 @@ try {
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).

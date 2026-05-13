@@ -23,7 +23,7 @@ class ExampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'pick a feature — example',
+      title: 'pick a feature - example',
       theme: ThemeData(
         colorSchemeSeed: Colors.indigo,
         useMaterial3: true,

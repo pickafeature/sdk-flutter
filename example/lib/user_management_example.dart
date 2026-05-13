@@ -84,8 +84,8 @@ class _UserManagementExampleState extends State<UserManagementExample> {
                     else if (_currentUser == null)
                       const Text('Anonymous (no identity set)')
                     else ...[
-                      _row('Email', _currentUser!.email ?? '—'),
-                      _row('Name', _currentUser!.name ?? '—'),
+                      _row('Email', _currentUser!.email ?? '-'),
+                      _row('Name', _currentUser!.name ?? '-'),
                     ],
                   ],
                 ),

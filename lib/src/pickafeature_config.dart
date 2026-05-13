@@ -38,7 +38,7 @@ class PickAFeatureConfig {
   /// Whether to show user email field
   final bool showEmailField;
 
-  /// Demo mode — shows mock data instead of calling the API
+  /// Demo mode - shows mock data instead of calling the API
   final bool demoMode;
 
   const PickAFeatureConfig({

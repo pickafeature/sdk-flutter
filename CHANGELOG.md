@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- Docs polish (README, CHANGELOG, pubspec description).
+
 ## 1.0.1
 
 - Dropped unused dependencies: `device_info_plus`, `package_info_plus`, `url_launcher`. Smaller install footprint and no out-of-date transitive constraints.
@@ -8,12 +12,12 @@
 
 First public release.
 
-- Drop-in `PickAFeatureScreen` widget — list, vote, and submit feature requests
+- Drop-in `PickAFeatureScreen` widget - list, vote, and submit feature requests
 - Submission form (`FeatureRequestScreen`) with separate title + description fields
 - Programmatic API: `getFeedbackRequests()`, `upvoteFeedback()`
 - User identity: `updateUser({email, name})` attaches the user's email to future feedback submissions so requests can be attributed in the dashboard
-- Anonymous device fallback — auto-generated UUID persisted with `shared_preferences` for users who don't sign in
-- Theming via `PickAFeatureConfig` — colors, border radius, custom copy, optional email field
+- Anonymous device fallback - auto-generated UUID persisted with `shared_preferences` for users who don't sign in
+- Theming via `PickAFeatureConfig` - colors, border radius, custom copy, optional email field
 - Configurable base URL for self-hosted backends
-- Typed errors via `ApiException` — `isAuthError`, `isRateLimit`, `isNetworkError`, `retryAfter`
+- Typed errors via `ApiException` - `isAuthError`, `isRateLimit`, `isNetworkError`, `retryAfter`
 - Demo mode (`PickAFeatureConfig.demoMode`) for offline development
