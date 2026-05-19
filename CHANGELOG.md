@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3
+
+- Fix: broken `thumb_up` icon and resulting Row overflow on every feature card. The icon was referenced via the old package name (`packages/wishkit/...`) and never resolved after the rebrand.
+- Fix: default `PickAFeatureScreen` title showed `WishKit` when `customTitle` was not set. Now defaults to `Feature requests`.
+
 ## 1.0.2
 
 - Docs polish (README, CHANGELOG, pubspec description).

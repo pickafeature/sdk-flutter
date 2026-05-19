@@ -202,7 +202,7 @@ class _FeatureRequestDetailsScreenState
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(
-                  'packages/wishkit/assets/thumb_up.png',
+                  'packages/pickafeature/assets/thumb_up.png',
                   width: 18,
                   height: 18,
                   color: primaryColor,
@@ -275,7 +275,7 @@ class _FeatureRequestDetailsScreenState
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(
-                  'packages/wishkit/assets/thumb_up.png',
+                  'packages/pickafeature/assets/thumb_up.png',
                   width: 18,
                   height: 18,
                   color: primaryColor,

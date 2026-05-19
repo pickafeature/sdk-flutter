@@ -311,7 +311,7 @@ class _PickAFeatureScreenState extends State<PickAFeatureScreen> {
         centerTitle: true,
         scrolledUnderElevation: 0,
         title: Text(
-          config.customTitle ?? 'WishKit',
+          config.customTitle ?? 'Feature requests',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
         shape: Border(
@@ -528,7 +528,7 @@ class _PickAFeatureScreenState extends State<PickAFeatureScreen> {
                                   ),
                                 )
                                 : Image.asset(
-                                  'packages/wishkit/assets/thumb_up.png',
+                                  'packages/pickafeature/assets/thumb_up.png',
                                   width: 18,
                                   height: 18,
                                   color:
