@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart' show defaultTargetPlatform, kIsWeb;
 import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
 import '../models/user.dart';
@@ -23,6 +24,13 @@ class ApiService {
     'Content-Type': 'application/json',
     if (apiKey != null) 'x-api-key': apiKey!,
   };
+
+  /// Platform name reported to the backend ("ios", "android", "web", ...) so
+  /// the dashboard can break users and requests down per platform.
+  static String get platformName {
+    if (kIsWeb) return 'web';
+    return defaultTargetPlatform.name.toLowerCase();
+  }
 
   /// Build an [ApiException] from a non-2xx [response]. Reads the JSON body's
   /// `error` field if present, falls back to a status-based message, and
@@ -92,6 +100,7 @@ class ApiService {
           'email': userEmail ?? userToUse.email,
           'deviceId': deviceId,
           'userId': userToUse.customId,
+          'platform': platformName,
         }),
       );
 
@@ -155,6 +164,7 @@ class ApiService {
           'deviceId': deviceId,
           'userId': userToUse.customId,
           'direction': direction,
+          'platform': platformName,
         }),
       );
 
@@ -223,6 +233,7 @@ class ApiService {
           'text': content,
           'deviceId': deviceId,
           'userId': userToUse.customId,
+          'platform': platformName,
         }),
       );
 

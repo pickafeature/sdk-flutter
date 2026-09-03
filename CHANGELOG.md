@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4
+
+- Report the platform (`ios`, `android`, `web`, `macos`, ...) with submissions, votes, and comments so the dashboard can show per-platform statistics. No API or UI changes.
+
 ## 1.0.3
 
 - Fix: broken `thumb_up` icon and resulting Row overflow on every feature card. The icon was referenced via the old package name (`packages/wishkit/...`) and never resolved after the rebrand.
