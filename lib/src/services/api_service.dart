@@ -13,16 +13,17 @@ class ApiService {
   final String? apiKey;
   final http.Client _client;
 
-  ApiService({
-    required this.baseUrl,
-    this.apiKey,
-    http.Client? client,
-  }) : _client = client ?? http.Client();
+  ApiService({required this.baseUrl, this.apiKey, http.Client? client})
+    : _client = client ?? http.Client();
 
   /// Get headers with API key
   Map<String, String> get _headers => {
     'Content-Type': 'application/json',
     if (apiKey != null) 'x-api-key': apiKey!,
+    // Lets the server tell SDKs that render team badges apart from older
+    // builds, which get a "Team:" prefix in titles and replies instead.
+    // Keep in sync with pubspec.yaml.
+    'x-sdk-version': '1.0.5',
   };
 
   /// Platform name reported to the backend ("ios", "android", "web", ...) so
@@ -126,7 +127,9 @@ class ApiService {
         final data = jsonDecode(utf8.decode(response.bodyBytes));
         final list = data['featureRequests'] ?? [];
         return (list as List)
-            .map((json) => FeatureRequest.fromJson(json as Map<String, dynamic>))
+            .map(
+              (json) => FeatureRequest.fromJson(json as Map<String, dynamic>),
+            )
             .toList();
       }
       throw _errorFromResponse(response, 'Failed to load feature requests');
@@ -146,7 +149,10 @@ class ApiService {
     return _vote(feedbackId, 'down');
   }
 
-  Future<Map<String, dynamic>> _vote(String feedbackId, String direction) async {
+  Future<Map<String, dynamic>> _vote(
+    String feedbackId,
+    String direction,
+  ) async {
     try {
       final userManager = PickAFeatureUserManager();
       final results = await Future.wait([
@@ -202,7 +208,9 @@ class ApiService {
       if (response.statusCode == 200) {
         final data = jsonDecode(utf8.decode(response.bodyBytes));
         final commentsList = data['comments'] ?? [];
-        return commentsList.map<Comment>((json) => Comment.fromJson(json)).toList();
+        return commentsList
+            .map<Comment>((json) => Comment.fromJson(json))
+            .toList();
       }
       throw _errorFromResponse(response, 'Failed to load comments');
     } catch (e) {

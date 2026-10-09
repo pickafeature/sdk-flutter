@@ -4,6 +4,7 @@
 
 - Show a `Team` badge on feature requests the project owner posted from the dashboard and on their replies in the comments, so users can tell them apart from other users' posts. `FeatureRequest` and `Comment` gain an `authorType` field (`user` | `admin`) and an `isTeam` getter.
 - Team posts sort to the top of the list, then everything by upvotes as before.
+- Requests now send an `x-sdk-version` header. Older SDK versions keep working: the server prefixes team posts and replies with `Team:` for them instead of relying on the badge.
 
 ## 1.0.4
 
