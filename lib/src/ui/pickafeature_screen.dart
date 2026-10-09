@@ -399,39 +399,44 @@ class _PickAFeatureScreenState extends State<PickAFeatureScreen> {
                     child:
                         _filteredFeatureRequests.isEmpty
                             ? Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    _featureRequests.isEmpty
-                                        ? Icons.lightbulb_outline
-                                        : Icons.check_circle_outline,
-                                    size: 64,
-                                    color: textColor.withValues(alpha: 0.2),
-                                  ),
-                                  SizedBox(height: 16),
-                                  Text(
-                                    _featureRequests.isEmpty
-                                        ? 'No feature requests found'
-                                        : 'No $_selectedStatus requests',
-                                    style: TextStyle(
-                                      color: textColor.withValues(alpha: 0.8),
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 32,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      _featureRequests.isEmpty
+                                          ? Icons.lightbulb_outline
+                                          : Icons.check_circle_outline,
+                                      size: 64,
+                                      color: textColor.withValues(alpha: 0.2),
                                     ),
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    _featureRequests.isEmpty
-                                        ? 'This project doesn\'t have any feature requests yet.\nCreate the first one to get started.'
-                                        : 'There are no feature requests with "$_selectedStatus" status yet.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: textColor.withValues(alpha: 0.5),
-                                      fontSize: 14,
+                                    SizedBox(height: 16),
+                                    Text(
+                                      _featureRequests.isEmpty
+                                          ? 'No feature requests found'
+                                          : 'No $_selectedStatus requests',
+                                      style: TextStyle(
+                                        color: textColor.withValues(alpha: 0.8),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(height: 8),
+                                    Text(
+                                      _featureRequests.isEmpty
+                                          ? 'This project doesn\'t have any feature requests yet.\nCreate the first one to get started.'
+                                          : 'There are no feature requests with "$_selectedStatus" status yet.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: textColor.withValues(alpha: 0.5),
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             )
                             : RefreshIndicator(

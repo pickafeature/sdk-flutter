@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+
+- Fix: empty-state text on the list screen ran edge to edge; it now has horizontal padding.
+
 ## 1.1.1
 
 - The `Reply` action shows on team comments only: users answer the team, not each other.
