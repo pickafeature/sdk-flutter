@@ -640,8 +640,8 @@ class _FeatureRequestDetailsScreenState
                                       height: 1.3,
                                     ),
                                   ),
-                                  // Answer inside this thread (one level deep).
-                                  if (comment.parentId == null) ...[
+                                  // Users can answer the team, not each other.
+                                  if (comment.isTeam) ...[
                                     const SizedBox(height: 4),
                                     GestureDetector(
                                       onTap:

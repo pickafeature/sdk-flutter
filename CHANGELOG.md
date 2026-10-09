@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- The `Reply` action shows on team comments only: users answer the team, not each other.
+
 ## 1.1.0
 
 - Users can answer inside a comment thread: a `Reply` action on each top-level comment, a "Replying to Team/User" line above the composer, and `addComment` takes an optional `parentId`. Threads stay one level deep.

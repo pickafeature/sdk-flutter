@@ -23,7 +23,7 @@ class ApiService {
     // Lets the server tell SDKs that render team badges apart from older
     // builds, which get a "Team:" prefix in titles and replies instead.
     // Keep in sync with pubspec.yaml.
-    'x-sdk-version': '1.1.0',
+    'x-sdk-version': '1.1.1',
   };
 
   /// Platform name reported to the backend ("ios", "android", "web", ...) so
