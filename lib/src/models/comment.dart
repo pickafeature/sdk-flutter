@@ -7,14 +7,19 @@ class Comment {
   /// the dashboard. The UI shows a Team badge on the latter.
   final String authorType;
 
+  /// Set when this is a team reply to a specific comment (one level deep).
+  final String? parentId;
+
   Comment({
     required this.id,
     required this.content,
     required this.createdAt,
     this.authorType = 'user',
+    this.parentId,
   });
 
   bool get isTeam => authorType == 'admin';
+  bool get isReply => parentId != null;
 
   factory Comment.fromJson(Map<String, dynamic> json) {
     DateTime createdAt;
@@ -34,6 +39,7 @@ class Comment {
       content: json['text'] ?? '',
       createdAt: createdAt,
       authorType: json['authorType'] ?? 'user',
+      parentId: json['parentId'] as String?,
     );
   }
 

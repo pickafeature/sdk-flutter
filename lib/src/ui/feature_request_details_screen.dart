@@ -25,6 +25,34 @@ class _FeatureRequestDetailsScreenState
   late final ApiService _apiService;
   final _commentController = TextEditingController();
   List<Comment> _comments = [];
+
+  /// Comments in display order: each top-level comment (as ordered in
+  /// [_comments]) followed by the team replies attached to it, oldest first.
+  List<Comment> get _threadedComments {
+    final replies = <String, List<Comment>>{};
+    for (final c in _comments) {
+      if (c.parentId != null) {
+        (replies[c.parentId!] ??= []).add(c);
+      }
+    }
+    for (final list in replies.values) {
+      list.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+    }
+    final out = <Comment>[];
+    for (final c in _comments) {
+      if (c.parentId != null) continue;
+      out.add(c);
+      out.addAll(replies[c.id] ?? const []);
+    }
+    // Replies whose parent is missing (deleted) still show, unindented.
+    for (final c in _comments) {
+      if (c.parentId != null && !_comments.any((p) => p.id == c.parentId)) {
+        out.add(c);
+      }
+    }
+    return out;
+  }
+
   bool _loadingComments = true;
   bool _submittingComment = false;
 
@@ -527,14 +555,22 @@ class _FeatureRequestDetailsScreenState
                       )
                       : ListView.builder(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
-                        itemCount: _comments.length,
+                        itemCount: _threadedComments.length,
                         itemBuilder: (context, index) {
-                          final comment = _comments[index];
+                          final threaded = _threadedComments;
+                          final comment = threaded[index];
                           // Team replies get a tinted card and a Team label so
                           // users can tell the owner's answers from each other's.
                           final isTeam = comment.isTeam;
+                          // Indent a reply only when its parent is in the list.
+                          final isReply =
+                              comment.parentId != null &&
+                              _comments.any((c) => c.id == comment.parentId);
                           return Container(
-                            margin: const EdgeInsets.only(bottom: 12),
+                            margin: EdgeInsets.only(
+                              bottom: 12,
+                              left: isReply ? 22 : 0,
+                            ),
                             decoration: BoxDecoration(
                               color:
                                   isTeam

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6
+
+- Team replies to a specific comment show indented under it (one level). `Comment` gains `parentId` and `isReply`.
+
 ## 1.0.5
 
 - Show a `Team` badge on feature requests the project owner posted from the dashboard and on their replies in the comments, so users can tell them apart from other users' posts. `FeatureRequest` and `Comment` gain an `authorType` field (`user` | `admin`) and an `isTeam` getter.
