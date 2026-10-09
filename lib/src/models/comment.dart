@@ -3,7 +3,18 @@ class Comment {
   final String content;
   final DateTime createdAt;
 
-  Comment({required this.id, required this.content, required this.createdAt});
+  /// `user` for app users, `admin` for replies the project owner posted from
+  /// the dashboard. The UI shows a Team badge on the latter.
+  final String authorType;
+
+  Comment({
+    required this.id,
+    required this.content,
+    required this.createdAt,
+    this.authorType = 'user',
+  });
+
+  bool get isTeam => authorType == 'admin';
 
   factory Comment.fromJson(Map<String, dynamic> json) {
     DateTime createdAt;
@@ -21,8 +32,8 @@ class Comment {
     return Comment(
       id: json['id'] ?? '',
       content: json['text'] ?? '',
-
       createdAt: createdAt,
+      authorType: json['authorType'] ?? 'user',
     );
   }
 
@@ -31,6 +42,7 @@ class Comment {
       'id': id,
       'content': content,
       'createdAt': createdAt.toIso8601String(),
+      'authorType': authorType,
     };
   }
 }

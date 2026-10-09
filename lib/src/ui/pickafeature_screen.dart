@@ -6,11 +6,15 @@ import '../pickafeature_config.dart';
 import '../services/api_service.dart';
 import '../models/feature_request.dart';
 import 'feature_request_screen.dart';
+import 'team_badge.dart';
 import 'feature_request_details_screen.dart';
 
 class PickAFeatureScreen extends StatefulWidget {
   final PickAFeatureConfig config;
-  const PickAFeatureScreen({super.key, this.config = const PickAFeatureConfig()});
+  const PickAFeatureScreen({
+    super.key,
+    this.config = const PickAFeatureConfig(),
+  });
 
   @override
   State<PickAFeatureScreen> createState() => _PickAFeatureScreenState();
@@ -83,10 +87,11 @@ class _PickAFeatureScreenState extends State<PickAFeatureScreen> {
 
   // Get filtered feature requests based on selected status
   List<FeatureRequest> get _filteredFeatureRequests {
-    final filtered = _featureRequests.where((request) {
-      final status = request.status.toLowerCase();
-      return status == _selectedStatus.toLowerCase();
-    }).toList();
+    final filtered =
+        _featureRequests.where((request) {
+          final status = request.status.toLowerCase();
+          return status == _selectedStatus.toLowerCase();
+        }).toList();
 
     // Sort by upvotes in descending order (highest first)
     filtered.sort((a, b) => b.upvotes.compareTo(a.upvotes));
@@ -559,16 +564,27 @@ class _PickAFeatureScreenState extends State<PickAFeatureScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          color: textColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          height: 1.3,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              title,
+                              style: TextStyle(
+                                color: textColor,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                height: 1.3,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          // Posted by the project owner from the dashboard.
+                          if (data.isTeam) ...[
+                            SizedBox(width: 6),
+                            TeamBadge(color: primaryColor),
+                          ],
+                        ],
                       ),
                       if (description.isNotEmpty) ...[
                         SizedBox(height: 6),

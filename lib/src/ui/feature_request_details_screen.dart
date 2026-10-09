@@ -3,6 +3,7 @@ import '../pickafeature_config.dart';
 import '../services/api_service.dart';
 import '../models/comment.dart';
 import '../models/feature_request.dart';
+import 'team_badge.dart';
 
 class FeatureRequestDetailsScreen extends StatefulWidget {
   final PickAFeatureConfig config;
@@ -187,14 +188,23 @@ class _FeatureRequestDetailsScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: textColor,
-                  height: 1.3,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (widget.featureRequest.isTeam) ...[
+                    TeamBadge(color: primaryColor),
+                    const SizedBox(height: 6),
+                  ],
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: textColor,
+                      height: 1.3,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(width: 8),
@@ -260,14 +270,23 @@ class _FeatureRequestDetailsScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: textColor,
-                  height: 1.3,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (widget.featureRequest.isTeam) ...[
+                    TeamBadge(color: primaryColor),
+                    const SizedBox(height: 6),
+                  ],
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: textColor,
+                      height: 1.3,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(width: 12),
@@ -511,14 +530,22 @@ class _FeatureRequestDetailsScreenState
                         itemCount: _comments.length,
                         itemBuilder: (context, index) {
                           final comment = _comments[index];
+                          // Team replies get a tinted card and a Team label so
+                          // users can tell the owner's answers from each other's.
+                          final isTeam = comment.isTeam;
                           return Container(
                             margin: const EdgeInsets.only(bottom: 12),
                             decoration: BoxDecoration(
-                              color: cardColor,
+                              color:
+                                  isTeam
+                                      ? primaryColor.withValues(alpha: 0.08)
+                                      : cardColor,
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
                                 color:
-                                    isDark
+                                    isTeam
+                                        ? primaryColor.withValues(alpha: 0.4)
+                                        : isDark
                                         ? Color(0xFF222222)
                                         : Color.fromARGB(255, 240, 240, 240),
                                 width: 1,
@@ -542,11 +569,12 @@ class _FeatureRequestDetailsScreenState
                                   Row(
                                     children: [
                                       Text(
-                                        'User',
+                                        isTeam ? 'Team' : 'User',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 13,
-                                          color: textColor,
+                                          color:
+                                              isTeam ? primaryColor : textColor,
                                         ),
                                       ),
                                       const SizedBox(width: 8),
@@ -554,7 +582,9 @@ class _FeatureRequestDetailsScreenState
                                         _formatDate(comment.createdAt),
                                         style: TextStyle(
                                           fontSize: 11,
-                                          color: textColor.withValues(alpha: 0.5),
+                                          color: textColor.withValues(
+                                            alpha: 0.5,
+                                          ),
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),

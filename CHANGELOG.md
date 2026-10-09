@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5
+
+- Show a `Team` badge on feature requests the project owner posted from the dashboard and on their replies in the comments, so users can tell them apart from other users' posts. `FeatureRequest` and `Comment` gain an `authorType` field (`user` | `admin`) and an `isTeam` getter.
+
 ## 1.0.4
 
 - Report the platform (`ios`, `android`, `web`, `macos`, ...) with submissions, votes, and comments so the dashboard can show per-platform statistics. No API or UI changes.

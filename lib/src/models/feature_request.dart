@@ -10,6 +10,10 @@ class FeatureRequest {
   final DateTime createdAt;
   final DateTime? updatedAt;
 
+  /// `user` for submissions from the app, `admin` for requests the project
+  /// owner posted from the dashboard. The UI shows a Team badge on the latter.
+  final String authorType;
+
   const FeatureRequest({
     required this.id,
     required this.title,
@@ -21,7 +25,10 @@ class FeatureRequest {
     this.priority,
     required this.createdAt,
     this.updatedAt,
+    this.authorType = 'user',
   });
+
+  bool get isTeam => authorType == 'admin';
 
   factory FeatureRequest.fromJson(Map<String, dynamic> json) {
     final createdAtRaw = json['createdAt'];
@@ -63,6 +70,7 @@ class FeatureRequest {
       priority: json['priority'],
       createdAt: createdAt,
       updatedAt: updatedAt,
+      authorType: json['authorType'] ?? 'user',
     );
   }
 
