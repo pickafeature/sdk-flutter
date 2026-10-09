@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+- Users can answer inside a comment thread: a `Reply` action on each top-level comment, a "Replying to Team/User" line above the composer, and `addComment` takes an optional `parentId`. Threads stay one level deep.
+
 ## 1.0.7
 
 - New `In progress` tab between `Planned` and `Completed`, so users can see what is being built right now. The first tab is now called `Planned` (was `Approved`). Older SDK versions keep working unchanged.

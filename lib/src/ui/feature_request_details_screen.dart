@@ -26,6 +26,9 @@ class _FeatureRequestDetailsScreenState
   final _commentController = TextEditingController();
   List<Comment> _comments = [];
 
+  /// Comment the user is answering inside its thread, if any.
+  Comment? _replyTo;
+
   /// Comments in display order: each top-level comment (as ordered in
   /// [_comments]) followed by the team replies attached to it, oldest first.
   List<Comment> get _threadedComments {
@@ -136,11 +139,13 @@ class _FeatureRequestDetailsScreenState
       final newComment = await _apiService.addComment(
         featureRequestId: widget.featureRequest.id,
         content: commentText,
+        parentId: _replyTo?.parentId ?? _replyTo?.id,
       );
 
       if (mounted) {
         setState(() {
           _comments.insert(0, newComment); // Add to the top of the list
+          _replyTo = null;
         });
         _commentController.clear();
       }
@@ -635,6 +640,24 @@ class _FeatureRequestDetailsScreenState
                                       height: 1.3,
                                     ),
                                   ),
+                                  // Answer inside this thread (one level deep).
+                                  if (comment.parentId == null) ...[
+                                    const SizedBox(height: 4),
+                                    GestureDetector(
+                                      onTap:
+                                          () => setState(
+                                            () => _replyTo = comment,
+                                          ),
+                                      child: Text(
+                                        'Reply',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: primaryColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ],
                               ),
                             ),
@@ -648,6 +671,30 @@ class _FeatureRequestDetailsScreenState
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
+                  if (_replyTo != null)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Replying to ${_replyTo!.isTeam ? 'Team' : 'User'}',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: textColor.withValues(alpha: 0.6),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          GestureDetector(
+                            onTap: () => setState(() => _replyTo = null),
+                            child: Icon(
+                              Icons.close,
+                              size: 14,
+                              color: textColor.withValues(alpha: 0.6),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   // Comment Field
                   Container(
                     decoration: BoxDecoration(

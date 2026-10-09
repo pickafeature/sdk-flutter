@@ -23,7 +23,7 @@ class ApiService {
     // Lets the server tell SDKs that render team badges apart from older
     // builds, which get a "Team:" prefix in titles and replies instead.
     // Keep in sync with pubspec.yaml.
-    'x-sdk-version': '1.0.7',
+    'x-sdk-version': '1.1.0',
   };
 
   /// Platform name reported to the backend ("ios", "android", "web", ...) so
@@ -220,9 +220,12 @@ class ApiService {
   }
 
   /// Add a comment to a feature request
+  /// [parentId] makes this a reply inside that comment's thread (one level
+  /// deep; the server attaches replies to replies to the same parent).
   Future<Comment> addComment({
     required String featureRequestId,
     required String content,
+    String? parentId,
   }) async {
     try {
       final userManager = PickAFeatureUserManager();
@@ -242,6 +245,7 @@ class ApiService {
           'deviceId': deviceId,
           'userId': userToUse.customId,
           'platform': platformName,
+          if (parentId != null) 'parentId': parentId,
         }),
       );
 
