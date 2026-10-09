@@ -30,8 +30,8 @@ class _PickAFeatureScreenState extends State<PickAFeatureScreen> {
   final Set<String> _upvotingIds = {}; // Track which items are being upvoted
 
   // State filtering
-  String _selectedStatus = 'approved';
-  final List<String> _statusOptions = ['approved', 'completed'];
+  String _selectedStatus = 'planned';
+  final List<String> _statusOptions = ['planned', 'in progress', 'completed'];
 
   @override
   void initState() {
@@ -89,7 +89,10 @@ class _PickAFeatureScreenState extends State<PickAFeatureScreen> {
   List<FeatureRequest> get _filteredFeatureRequests {
     final filtered =
         _featureRequests.where((request) {
-          final status = request.status.toLowerCase();
+          // Servers that predate the In progress tab send "approved" for
+          // planned + in progress; show those under Planned.
+          final raw = request.status.toLowerCase();
+          final status = raw == 'approved' ? 'planned' : raw;
           return status == _selectedStatus.toLowerCase();
         }).toList();
 

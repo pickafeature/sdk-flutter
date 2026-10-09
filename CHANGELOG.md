@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.7
+
+- New `In progress` tab between `Planned` and `Completed`, so users can see what is being built right now. The first tab is now called `Planned` (was `Approved`). Older SDK versions keep working unchanged.
+
 ## 1.0.6
 
 - Team replies to a specific comment show indented under it (one level). `Comment` gains `parentId` and `isReply`.
