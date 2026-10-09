@@ -3,6 +3,7 @@
 ## 1.0.5
 
 - Show a `Team` badge on feature requests the project owner posted from the dashboard and on their replies in the comments, so users can tell them apart from other users' posts. `FeatureRequest` and `Comment` gain an `authorType` field (`user` | `admin`) and an `isTeam` getter.
+- Team posts sort to the top of the list, then everything by upvotes as before.
 
 ## 1.0.4
 

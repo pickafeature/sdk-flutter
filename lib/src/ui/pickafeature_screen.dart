@@ -93,8 +93,11 @@ class _PickAFeatureScreenState extends State<PickAFeatureScreen> {
           return status == _selectedStatus.toLowerCase();
         }).toList();
 
-    // Sort by upvotes in descending order (highest first)
-    filtered.sort((a, b) => b.upvotes.compareTo(a.upvotes));
+    // Team posts first so announcements are seen, then by upvotes (highest first)
+    filtered.sort((a, b) {
+      if (a.isTeam != b.isTeam) return a.isTeam ? -1 : 1;
+      return b.upvotes.compareTo(a.upvotes);
+    });
 
     return filtered;
   }
